@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=80", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DiffPDF"
+dynamic = ["version"]
+description = "A tool for comparing PDF files"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Justus Rijke"}]
+requires-python = ">=3.12"
+dependencies = [
+    "click",
+    "colorlog",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[project.scripts]
+DiffPDF = "DiffPDF:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
