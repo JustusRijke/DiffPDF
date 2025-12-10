@@ -5,7 +5,7 @@ from .cli import cli
 __version__ = version("DiffPDF")
 
 
-def main(args=None):
+def main(args=None):  # pragma: no cover
     if args is None:
         cli()
     else:

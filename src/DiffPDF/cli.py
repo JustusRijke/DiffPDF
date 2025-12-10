@@ -1,10 +1,14 @@
 import logging
+import sys
+from pathlib import Path
 
 import click
 import colorlog
 
+from .comparators import compare_pdfs
 
-def setup_logging(debug, save_log):
+
+def setup_logging(debug, save_log):  # pragma: no cover
     level = logging.DEBUG if debug else logging.INFO
 
     formatter = colorlog.ColoredFormatter(
@@ -39,15 +43,22 @@ def setup_logging(debug, save_log):
 
 
 @click.command()
-@click.option("--foobar", type=str, help="Example argument; prints value to stdout")
-@click.option("--debug", is_flag=True, help="Set log level to DEBUG")
+@click.argument("reference", type=click.Path(exists=True, dir_okay=False, path_type=Path))
+@click.argument("actual", type=click.Path(exists=True, dir_okay=False, path_type=Path))
+@click.option("--threshold", type=float, default=0.1, help="Pixelmatch threshold (0.0-1.0)")
+@click.option("--dpi", type=int, default=96, help="Render resolution")
+@click.option(
+    "--output-dir", type=click.Path(file_okay=False, path_type=Path), default="./", help="Diff image output directory"
+)
+@click.option("--debug", is_flag=True, help="Verbose logging")
 @click.option("--save-log", is_flag=True, help="Write log output to log.txt")
 @click.version_option(package_name="DiffPDF")
-def cli(foobar, debug, save_log):
+def cli(reference, actual, threshold, dpi, output_dir, debug, save_log):
+    """Compare two PDF files for structural, textual, and visual differences."""
     logger = setup_logging(debug, save_log)
 
-    if foobar:
-        print(foobar)
-
-    logger.info("DiffPDF started")
-    logger.debug("Debug mode enabled")
+    try:
+        compare_pdfs(reference, actual, threshold, dpi, output_dir, logger)
+    except Exception as e:  # pragma: no cover
+        logger.critical(f"Error: {e}")
+        sys.exit(2)
