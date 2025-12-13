@@ -7,7 +7,7 @@ CLI tool for detecting structural, textual, and visual differences between PDF f
 ## Installation
 
 ```bash
-pip install DiffPDF
+pip install diffpdf
 ```
 
 ## Usage

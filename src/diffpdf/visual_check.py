@@ -47,7 +47,9 @@ def check_visual_content(
 
         ref_name = ref.stem
         actual_name = actual.stem
-        output_path = output_dir / f"{ref_name}_vs_{actual_name}_page{page_num + 1}_diff.png"
+        output_path = (
+            output_dir / f"{ref_name}_vs_{actual_name}_page{page_num + 1}_diff.png"
+        )
 
         passed = compare_images(ref_img, actual_img, threshold, output_path)
 
@@ -55,7 +57,9 @@ def check_visual_content(
             failing_pages.append(page_num + 1)
 
     if failing_pages:
-        logger.error(f"✗ Visual mismatch on pages: {', '.join(map(str, failing_pages))}")
+        logger.error(
+            f"✗ Visual mismatch on pages: {', '.join(map(str, failing_pages))}"
+        )
         sys.exit(1)
 
     logger.info("✓ Visual content matches")

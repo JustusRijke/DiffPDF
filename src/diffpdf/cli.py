@@ -43,16 +43,23 @@ def setup_logging(debug, save_log):  # pragma: no cover
 
 
 @click.command()
-@click.argument("reference", type=click.Path(exists=True, dir_okay=False, path_type=Path))
+@click.argument(
+    "reference", type=click.Path(exists=True, dir_okay=False, path_type=Path)
+)
 @click.argument("actual", type=click.Path(exists=True, dir_okay=False, path_type=Path))
-@click.option("--threshold", type=float, default=0.1, help="Pixelmatch threshold (0.0-1.0)")
+@click.option(
+    "--threshold", type=float, default=0.1, help="Pixelmatch threshold (0.0-1.0)"
+)
 @click.option("--dpi", type=int, default=96, help="Render resolution")
 @click.option(
-    "--output-dir", type=click.Path(file_okay=False, path_type=Path), default="./", help="Diff image output directory"
+    "--output-dir",
+    type=click.Path(file_okay=False, path_type=Path),
+    default="./",
+    help="Diff image output directory",
 )
 @click.option("--debug", is_flag=True, help="Verbose logging")
 @click.option("--save-log", is_flag=True, help="Write log output to log.txt")
-@click.version_option(package_name="DiffPDF")
+@click.version_option(package_name="diffpdf")
 def cli(reference, actual, threshold, dpi, output_dir, debug, save_log):
     """Compare two PDF files for structural, textual, and visual differences."""
     logger = setup_logging(debug, save_log)

@@ -2,7 +2,7 @@ from importlib.metadata import version
 
 from .cli import cli
 
-__version__ = version("DiffPDF")
+__version__ = version("diffpdf")
 
 
 def main(args=None):  # pragma: no cover

@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from click.testing import CliRunner
 
-from DiffPDF.cli import cli
+from diffpdf.cli import cli
 
 
 @pytest.mark.parametrize(
