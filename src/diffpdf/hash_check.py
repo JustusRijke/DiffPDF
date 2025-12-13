@@ -18,7 +18,7 @@ def check_hash(ref: Path, actual: Path, logger) -> None:
     actual_hash = compute_file_hash(actual)
 
     if ref_hash == actual_hash:
-        logger.info("✓ Files are identical (hash match)")
+        logger.info("Files are identical (hash match)")
         sys.exit(0)
 
-    logger.info("→ Hashes differ, continuing checks")
+    logger.info("Hashes differ, continuing checks")

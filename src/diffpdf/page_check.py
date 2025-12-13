@@ -18,7 +18,7 @@ def check_page_counts(ref: Path, actual: Path, logger) -> None:
     actual_count = get_page_count(actual)
 
     if ref_count != actual_count:
-        logger.error(f"✗ Page count mismatch: expected {ref_count}, got {actual_count}")
+        logger.error(f"Page count mismatch: expected {ref_count}, got {actual_count}")
         sys.exit(1)
 
-    logger.info(f"✓ Page counts match ({ref_count} pages)")
+    logger.info(f"Page counts match ({ref_count} pages)")

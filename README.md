@@ -20,10 +20,10 @@ diffpdf <baseline.pdf> <actual.pdf> [OPTIONS]
 
 DiffPDF uses a fail-fast sequential pipeline to compare PDFs:
 
-1. **Hash Check** — SHA-256 comparison. If identical, exit immediately with pass.
-2. **Page Count** — Verify both PDFs have the same number of pages.
-3. **Text Content** — Extract and compare text from all pages.
-4. **Visual Check** — Render pages to images and compare using pixelmatch.
+1. **Hash Check** - SHA-256 comparison. If identical, exit immediately with pass.
+2. **Page Count** - Verify both PDFs have the same number of pages.
+3. **Text Content** - Extract and compare text from all pages.
+4. **Visual Check** - Render pages to images and compare using pixelmatch.
 
 Each stage only runs if all previous stages pass.
 

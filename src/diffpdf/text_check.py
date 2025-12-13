@@ -37,9 +37,9 @@ def check_text_content(ref: Path, actual: Path, logger) -> None:
 
     if ref_text != actual_text:
         diff = generate_diff(ref_text, actual_text)
-        logger.error("✗ Text content mismatch")
+        logger.error("Text content mismatch")
         for line in diff.splitlines():
             logger.error(line)
         sys.exit(1)
 
-    logger.info("✓ Text content matches")
+    logger.info("Text content matches")

@@ -18,5 +18,5 @@ def compare_pdfs(
 
     check_visual_content(ref, actual, threshold, dpi, output_dir, logger)
 
-    logger.info("✓ PDFs are equivalent")
+    logger.info("PDFs are equivalent")
     sys.exit(0)
