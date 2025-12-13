@@ -10,10 +10,16 @@ name = "diffpdf"
 dynamic = ["version"]
 description = "A tool for comparing PDF files"
 readme = "README.md"
-license = {text = "MIT"}
-authors = [{name = "Justus Rijke"}]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+authors = [{name = "Justus Rijke", email="justusrijke@gmail.com"}]
 requires-python = ">=3.10"
-
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+]
 dependencies = [
     "click",
     "colorlog",
@@ -21,6 +27,10 @@ dependencies = [
     "pixelmatch>=0.3.0",
     "Pillow>=10.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/JustusRijke/DiffPDF"
+Issues = "https://github.com/JustusRijke/DiffPDF/issues"
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff"]
@@ -30,3 +40,6 @@ diffpdf = "diffpdf:main"
 
 [tool.hatch.version]
 source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"

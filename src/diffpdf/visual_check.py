@@ -57,9 +57,7 @@ def check_visual_content(
             failing_pages.append(page_num + 1)
 
     if failing_pages:
-        logger.error(
-            f"Visual mismatch on pages: {', '.join(map(str, failing_pages))}"
-        )
+        logger.error(f"Visual mismatch on pages: {', '.join(map(str, failing_pages))}")
         sys.exit(1)
 
     logger.info("Visual content matches")
