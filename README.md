@@ -1,20 +1,11 @@
 # DiffPDF
 
-[![CI](https://github.com/JustusRijke/DiffPDF/actions/workflows/ci.yml/badge.svg)](https://github.com/JustusRijke/DiffPDF/actions/workflows/ci.yml)
+[![Build](https://github.com/JustusRijke/DiffPDF/actions/workflows/build.yml/badge.svg)](https://github.com/JustusRijke/DiffPDF/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/JustusRijke/DiffPDF/graph/badge.svg?token=O3ZJFG6X7A)](https://codecov.io/gh/JustusRijke/DiffPDF)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 CLI tool for detecting structural, textual, and visual differences between PDF files, for use in automatic regression tests.
-
-## Installation
-
-```bash
-pip install diffpdf
-```
-
-## Usage
-
-```bash
-diffpdf <baseline.pdf> <actual.pdf> [OPTIONS]
-```
 
 ## How It Works
 
@@ -29,21 +20,41 @@ Each stage only runs if all previous stages pass.
 
 **⚠️ Performance Warning:** The Python port of pixelmatch is extremely slow.
 
-## Options
+## Installation
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--threshold` | 0.1 | Pixelmatch threshold (0.0-1.0) |
-| `--dpi` | 96 | Render resolution |
-| `--output-dir` | ./ | Directory for diff images |
-| `--debug` | - | Verbose logging |
-| `--save-log` | - | Write log to log.txt |
+```bash
+pip install diffpdf
+```
 
-## Exit Codes
+## CLI Usage
+```
+Usage: diffpdf [OPTIONS] REFERENCE ACTUAL
+
+  Compare two PDF files for structural, textual, and visual differences.
+
+Options:
+  --threshold FLOAT       Pixelmatch threshold (0.0-1.0)
+  --dpi INTEGER           Render resolution
+  --output-dir DIRECTORY  Diff image output directory
+  -v, --verbose           Increase verbosity (-v for INFO, -vv for DEBUG)
+  --save-log              Write log output to log.txt
+  --version               Show the version and exit.
+  --help                  Show this message and exit.
+```
+
+**Exit Codes**
 
 - `0` — Pass (PDFs are equivalent)
 - `1` — Fail (differences detected)
 - `2` — Error (invalid input or processing error)
+
+## Library Usage
+
+Call the CLI from Python:
+```python
+from diffpdf import main
+main(["-vv","foo.pdf", "bar.pdf"])
+```
 
 ## Development
 
