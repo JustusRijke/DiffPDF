@@ -36,7 +36,7 @@ def setup_logging(verbosity, save_log):
     logger.setLevel(level)
     logger.addHandler(console_handler)
 
-    if save_log: # pragma: no cover
+    if save_log:  # pragma: no cover
         file_formatter = logging.Formatter(LOG_FORMAT, datefmt=DATE_FORMAT)
         file_handler = logging.FileHandler("log.txt")
         file_handler.setFormatter(file_formatter)

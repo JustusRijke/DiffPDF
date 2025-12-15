@@ -1,6 +1,8 @@
 import difflib
+import re
 import sys
 from pathlib import Path
+from typing import Iterable
 
 import fitz
 
@@ -14,32 +16,34 @@ def extract_text(pdf_path: Path) -> str:
     return text.strip()
 
 
-def generate_diff(ref_text: str, actual_text: str) -> str:
+def generate_diff(
+    ref_text: str, ref: Path, actual_text: str, actual: Path
+) -> Iterable[str]:
     ref_lines = ref_text.splitlines(keepends=True)
     actual_lines = actual_text.splitlines(keepends=True)
 
     diff = difflib.unified_diff(
         ref_lines,
         actual_lines,
-        fromfile="reference.pdf",
-        tofile="actual.pdf",
+        fromfile=ref.name,
+        tofile=actual.name,
         lineterm="",
     )
 
-    return "".join(diff)
+    return diff
 
 
 def check_text_content(ref: Path, actual: Path, logger) -> None:
     logger.info("[3/4] Checking text content...")
 
-    ref_text = extract_text(ref)
-    actual_text = extract_text(actual)
+    # Extract text and remove whitespace
+    ref_text = re.sub(r"\s+", " ", extract_text(ref)).strip()
+    actual_text = re.sub(r"\s+", " ", extract_text(actual)).strip()
 
     if ref_text != actual_text:
-        diff = generate_diff(ref_text, actual_text)
-        logger.error("Text content mismatch")
-        for line in diff.splitlines():
-            logger.error(line)
+        diff = generate_diff(ref_text, ref, actual_text, actual)
+        diff_text = "\n".join(diff)
+        logger.error(f"Text content mismatch:\n {diff_text}")
         sys.exit(1)
 
     logger.info("Text content matches")
