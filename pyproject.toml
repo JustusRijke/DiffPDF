@@ -33,7 +33,11 @@ Homepage = "https://github.com/JustusRijke/DiffPDF"
 Issues = "https://github.com/JustusRijke/DiffPDF/issues"
 
 [project.optional-dependencies]
-dev = ["pytest", "ruff"]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+]
 
 [project.scripts]
 diffpdf = "diffpdf:main"
