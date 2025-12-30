@@ -3,7 +3,7 @@ from pathlib import Path
 
 import fitz
 from PIL import Image
-from pixelmatch.contrib.PIL import pixelmatch
+from pixelmatch import pixelmatch
 
 
 def render_page_to_image(pdf_path: Path, page_num: int, dpi: int) -> Image.Image:
@@ -18,11 +18,11 @@ def render_page_to_image(pdf_path: Path, page_num: int, dpi: int) -> Image.Image
 def compare_images(
     ref_img: Image.Image, actual_img: Image.Image, threshold: float, output_path: Path
 ) -> bool:
-    diff_img = Image.new("RGB", ref_img.size)
-    mismatch_count = pixelmatch(ref_img, actual_img, diff_img, threshold=threshold)
+    mismatch_count = pixelmatch(
+        ref_img, actual_img, diff_path=output_path, threshold=threshold
+    )
 
     if mismatch_count > 0:
-        diff_img.save(output_path)
         return False
 
     return True

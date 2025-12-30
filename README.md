@@ -14,11 +14,9 @@ DiffPDF uses a fail-fast sequential pipeline to compare PDFs:
 1. **Hash Check** - SHA-256 comparison. If identical, exit immediately with pass.
 2. **Page Count** - Verify both PDFs have the same number of pages.
 3. **Text Content** - Extract and compare text from all pages (ignoring whitespace).
-4. **Visual Check** - Render pages to images and compare using pixelmatch.
+4. **Visual Check** - Render pages to images and compare using [pixelmatch-fast](https://pypi.org/project/pixelmatch-fast/).
 
 Each stage only runs if all previous stages pass.
-
-**⚠️ Performance Warning:** The Python port of pixelmatch is extremely slow.
 
 ## Installation
 
@@ -66,4 +64,4 @@ ruff check .
 
 ## Acknowledgements
 
-Built with [PyMuPDF](https://pymupdf.readthedocs.io/) for PDF parsing and [pixelmatch-py](https://github.com/whtsky/pixelmatch-py) (Python port of [pixelmatch](https://github.com/mapbox/pixelmatch)) for visual comparison.
+Built with [PyMuPDF](https://pymupdf.readthedocs.io/) for PDF parsing and [pixelmatch-fast](https://pypi.org/project/pixelmatch-fast/) (Python port of [pixelmatch](https://github.com/mapbox/pixelmatch)) for visual comparison.

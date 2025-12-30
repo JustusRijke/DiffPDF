@@ -24,7 +24,7 @@ dependencies = [
     "click",
     "colorlog",
     "pymupdf>=1.23.0",
-    "pixelmatch>=0.3.0",
+    "pixelmatch-fast>=1.1.0",
     "Pillow>=10.0.0",
 ]
 
