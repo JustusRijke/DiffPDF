@@ -16,7 +16,10 @@ def render_page_to_image(pdf_path: Path, page_num: int, dpi: int) -> Image.Image
 
 
 def compare_images(
-    ref_img: Image.Image, actual_img: Image.Image, threshold: float, output_path: Path
+    ref_img: Image.Image,
+    actual_img: Image.Image,
+    threshold: float,
+    output_path: Path | None,
 ) -> bool:
     mismatch_count = pixelmatch(
         ref_img, actual_img, diff_path=output_path, threshold=threshold
@@ -29,11 +32,12 @@ def compare_images(
 
 
 def check_visual_content(
-    ref: Path, actual: Path, threshold: float, dpi: int, output_dir: Path, logger
+    ref: Path, actual: Path, threshold: float, dpi: int, output_dir: Path | None, logger
 ) -> None:
     logger.info("[4/4] Checking visual content...")
 
-    output_dir.mkdir(parents=True, exist_ok=True)
+    if output_dir is not None:
+        output_dir.mkdir(parents=True, exist_ok=True)
 
     ref_doc = fitz.open(ref)
     page_count = len(ref_doc)
@@ -45,11 +49,13 @@ def check_visual_content(
         ref_img = render_page_to_image(ref, page_num, dpi)
         actual_img = render_page_to_image(actual, page_num, dpi)
 
-        ref_name = ref.stem
-        actual_name = actual.stem
-        output_path = (
-            output_dir / f"{ref_name}_vs_{actual_name}_page{page_num + 1}_diff.png"
-        )
+        output_path = None
+        if output_dir is not None:
+            ref_name = ref.stem
+            actual_name = actual.stem
+            output_path = (
+                output_dir / f"{ref_name}_vs_{actual_name}_page{page_num + 1}_diff.png"
+            )
 
         passed = compare_images(ref_img, actual_img, threshold, output_path)
 

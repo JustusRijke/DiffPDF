@@ -19,8 +19,8 @@ from .logger import setup_logging
 @click.option(
     "--output-dir",
     type=click.Path(file_okay=False, path_type=Path),
-    default="./",
-    help="Diff image output directory",
+    default=None,
+    help="Diff image output directory (if not specified, no diff images are saved)",
 )
 @click.option(
     "-v",

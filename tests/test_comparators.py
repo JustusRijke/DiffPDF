@@ -33,3 +33,16 @@ def test_comparators(ref_pdf_rel, actual_pdf_rel, expected_exit_code):
     result = runner.invoke(cli, [ref_pdf, actual_pdf])
 
     assert result.exit_code == expected_exit_code
+
+
+def test_comparators_with_output_dir():
+    runner = CliRunner()
+
+    with runner.isolated_filesystem():
+        ref_pdf = str(TEST_ASSETS_DIR / "fail/major-color-diff-A.pdf")
+        actual_pdf = str(TEST_ASSETS_DIR / "fail/major-color-diff-B.pdf")
+
+        result = runner.invoke(cli, [ref_pdf, actual_pdf, "--output-dir", "./diff"])
+
+        assert result.exit_code == 1
+        assert Path("./diff").exists()

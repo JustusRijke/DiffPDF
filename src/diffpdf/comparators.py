@@ -8,7 +8,7 @@ from .visual_check import check_visual_content
 
 
 def compare_pdfs(
-    ref: Path, actual: Path, threshold: float, dpi: int, output_dir: Path, logger
+    ref: Path, actual: Path, threshold: float, dpi: int, output_dir: Path | None, logger
 ) -> None:
     check_hash(ref, actual, logger)
 

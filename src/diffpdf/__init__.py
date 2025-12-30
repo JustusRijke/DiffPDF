@@ -12,7 +12,7 @@ def diffpdf(
     actual: str | Path,
     threshold: float = 0.1,
     dpi: int = 96,
-    output_dir: str | Path = "./",
+    output_dir: str | Path | None = None,
     verbosity: int = 0,
     save_log: bool = False,
 ) -> None:
