@@ -40,7 +40,7 @@ dev = [
 ]
 
 [project.scripts]
-diffpdf = "diffpdf:main"
+diffpdf = "diffpdf.cli:cli"
 
 [tool.hatch.version]
 source = "vcs"

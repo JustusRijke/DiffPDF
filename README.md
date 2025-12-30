@@ -48,10 +48,11 @@ Options:
 
 ## Library Usage
 
-Call the CLI from Python:
 ```python
-from diffpdf import main
-main(["-vv","foo.pdf", "bar.pdf"])
+from diffpdf import diffpdf
+
+diffpdf("reference.pdf", "actual.pdf")
+diffpdf("reference.pdf", "actual.pdf", output_dir="./output", threshold=0.2, dpi=150, verbosity=2)
 ```
 
 ## Development
