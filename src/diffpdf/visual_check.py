@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 
 import fitz
@@ -10,7 +9,7 @@ def render_page_to_image(pdf_path: Path, page_num: int, dpi: int) -> Image.Image
     doc = fitz.open(pdf_path)
     page = doc[page_num]
     pix = page.get_pixmap(dpi=dpi)
-    img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+    img = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
     doc.close()
     return img
 
@@ -33,9 +32,7 @@ def compare_images(
 
 def check_visual_content(
     ref: Path, actual: Path, threshold: float, dpi: int, output_dir: Path | None, logger
-) -> None:
-    logger.info("[4/4] Checking visual content...")
-
+) -> bool:
     if output_dir is not None:
         output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -64,6 +61,7 @@ def check_visual_content(
 
     if failing_pages:
         logger.error(f"Visual mismatch on pages: {', '.join(map(str, failing_pages))}")
-        sys.exit(1)
+        return False
 
     logger.info("Visual content matches")
+    return True

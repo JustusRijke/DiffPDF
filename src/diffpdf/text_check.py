@@ -1,6 +1,5 @@
 import difflib
 import re
-import sys
 from pathlib import Path
 from typing import Iterable
 
@@ -33,9 +32,7 @@ def generate_diff(
     return diff
 
 
-def check_text_content(ref: Path, actual: Path, logger) -> None:
-    logger.info("[3/4] Checking text content...")
-
+def check_text_content(ref: Path, actual: Path, logger) -> bool:
     # Extract text and remove whitespace
     ref_text = re.sub(r"\s+", " ", extract_text(ref)).strip()
     actual_text = re.sub(r"\s+", " ", extract_text(actual)).strip()
@@ -44,6 +41,7 @@ def check_text_content(ref: Path, actual: Path, logger) -> None:
         diff = generate_diff(ref_text, ref, actual_text, actual)
         diff_text = "\n".join(diff)
         logger.error(f"Text content mismatch:\n {diff_text}")
-        sys.exit(1)
+        return False
 
-    logger.info("Text content matches")
+    logger.info("Text content identical")
+    return True

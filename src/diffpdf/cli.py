@@ -37,7 +37,10 @@ def cli(reference, actual, threshold, dpi, output_dir, verbosity, save_log):
     logger.debug("Debug logging enabled")
 
     try:
-        compare_pdfs(reference, actual, threshold, dpi, output_dir, logger)
+        if compare_pdfs(reference, actual, threshold, dpi, output_dir, logger):
+            sys.exit(0)
+        else:
+            sys.exit(1)
     except Exception as e:  # pragma: no cover
         logger.critical(f"Error: {e}", exc_info=True)
         sys.exit(2)

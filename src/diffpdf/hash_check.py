@@ -1,5 +1,4 @@
 import hashlib
-import sys
 from pathlib import Path
 
 
@@ -11,14 +10,8 @@ def compute_file_hash(filepath: Path) -> str:
     return sha256.hexdigest()
 
 
-def check_hash(ref: Path, actual: Path, logger) -> None:
-    logger.info("[1/4] Checking file hashes...")
-
+def check_hash(ref: Path, actual: Path) -> bool:
     ref_hash = compute_file_hash(ref)
     actual_hash = compute_file_hash(actual)
 
-    if ref_hash == actual_hash:
-        logger.info("Files are identical (hash match)")
-        sys.exit(0)
-
-    logger.info("Hashes differ, continuing checks")
+    return ref_hash == actual_hash
