@@ -1,4 +1,15 @@
 {
+    // Format with Ruff on save & sort imports
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports.ruff": "explicit"
+    },
+
+    // Enable MyPy type checker
+    "mypy.runUsingActiveInterpreter": true,
+
+    // Configure Pytest
     "python.testing.pytestArgs": [
         "tests"
     ],
