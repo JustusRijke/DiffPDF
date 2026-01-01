@@ -37,8 +37,8 @@ def check_visual_content(
     threshold: float,
     dpi: int,
     output_dir: Path | None,
-    logger: logging.Logger,
 ) -> bool:
+    logger = logging.getLogger()
     if output_dir is not None:
         output_dir.mkdir(parents=True, exist_ok=True)
 
