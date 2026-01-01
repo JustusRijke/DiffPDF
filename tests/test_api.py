@@ -1,13 +1,31 @@
 # type: ignore
 from pathlib import Path
 
+import pytest
+
 from diffpdf import diffpdf
 
 TEST_ASSETS_DIR = Path(__file__).parent / "assets"
 
 
-def test_diffpdf():
-    assert diffpdf(
-        TEST_ASSETS_DIR / "pass/identical-A.pdf",
-        TEST_ASSETS_DIR / "pass/identical-B.pdf",
-    )
+@pytest.mark.parametrize(
+    "ref_pdf_rel,actual_pdf_rel,should_pass",
+    [
+        # Pass cases
+        ("pass/identical-A.pdf", "pass/identical-B.pdf", True),
+        ("pass/hash-diff-A.pdf", "pass/hash-diff-B.pdf", True),
+        ("pass/minor-color-diff-A.pdf", "pass/minor-color-diff-B.pdf", True),
+        ("pass/multiplatform-diff-A.pdf", "pass/multiplatform-diff-B.pdf", True),
+        # Fail cases
+        ("fail/1-letter-diff-A.pdf", "fail/1-letter-diff-B.pdf", False),
+        ("fail/major-color-diff-A.pdf", "fail/major-color-diff-B.pdf", False),
+        ("fail/page-count-diff-A.pdf", "fail/page-count-diff-B.pdf", False),
+    ],
+)
+def test_api(ref_pdf_rel, actual_pdf_rel, should_pass):
+    ref_pdf = TEST_ASSETS_DIR / ref_pdf_rel
+    actual_pdf = TEST_ASSETS_DIR / actual_pdf_rel
+
+    result = diffpdf(ref_pdf, actual_pdf)
+
+    assert result == should_pass

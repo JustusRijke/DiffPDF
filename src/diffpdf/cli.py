@@ -3,7 +3,7 @@ from pathlib import Path
 
 import click
 
-from .comparators import compare_pdfs
+from . import diffpdf
 from .logger import setup_logging
 
 
@@ -41,14 +41,12 @@ def cli(
     save_log: bool,
 ) -> None:
     """Compare two PDF files for structural, textual, and visual differences."""
-    logger = setup_logging(verbosity, save_log)
-    logger.debug("Debug logging enabled")
-
     try:
-        if compare_pdfs(reference, actual, threshold, dpi, output_dir, logger):
+        if diffpdf(reference, actual, threshold, dpi, output_dir, verbosity, save_log):
             sys.exit(0)
         else:
             sys.exit(1)
     except Exception as e:  # pragma: no cover
+        logger = setup_logging(verbosity, save_log)
         logger.critical(f"Error: {e}", exc_info=True)
         sys.exit(2)

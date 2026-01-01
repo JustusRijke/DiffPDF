@@ -1,8 +1,11 @@
 from importlib.metadata import version
 from pathlib import Path
 
-from .comparators import compare_pdfs
+from .hash_check import check_hash
 from .logger import setup_logging
+from .page_check import check_page_counts
+from .text_check import check_text_content
+from .visual_check import check_visual_content
 
 __version__ = version("diffpdf")
 
@@ -21,7 +24,30 @@ def diffpdf(
     out_path = Path(output_dir) if isinstance(output_dir, str) else output_dir
 
     logger = setup_logging(verbosity, save_log)
-    return compare_pdfs(ref_path, actual_path, threshold, dpi, out_path, logger)
+    logger.debug("Debug logging enabled")
+
+    logger.info("[1/4] Checking file hashes...")
+    if check_hash(ref_path, actual_path):
+        logger.info("Files are identical (hash match)")
+        return True
+    logger.info("Hashes differ, continuing checks")
+
+    logger.info("[2/4] Checking page counts...")
+    if not check_page_counts(ref_path, actual_path, logger):
+        return False
+
+    logger.info("[3/4] Checking text content...")
+    if not check_text_content(ref_path, actual_path, logger):
+        return False
+
+    logger.info("[4/4] Checking visual content...")
+    if not check_visual_content(
+        ref_path, actual_path, threshold, dpi, out_path, logger
+    ):
+        return False
+
+    logger.info("PDFs are equivalent")
+    return True
 
 
 __all__ = ["diffpdf", "__version__"]
