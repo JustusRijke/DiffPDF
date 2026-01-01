@@ -1,4 +1,5 @@
 import difflib
+import logging
 import re
 from pathlib import Path
 from typing import Iterable
@@ -32,7 +33,7 @@ def generate_diff(
     return diff
 
 
-def check_text_content(ref: Path, actual: Path, logger) -> bool:
+def check_text_content(ref: Path, actual: Path, logger: logging.Logger) -> bool:
     # Extract text and remove whitespace
     ref_text = re.sub(r"\s+", " ", extract_text(ref)).strip()
     actual_text = re.sub(r"\s+", " ", extract_text(actual)).strip()

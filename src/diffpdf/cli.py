@@ -31,7 +31,15 @@ from .logger import setup_logging
 )
 @click.option("--save-log", is_flag=True, help="Write log output to log.txt")
 @click.version_option(package_name="diffpdf")
-def cli(reference, actual, threshold, dpi, output_dir, verbosity, save_log):
+def cli(
+    reference: Path,
+    actual: Path,
+    threshold: float,
+    dpi: int,
+    output_dir: Path | None,
+    verbosity: int,
+    save_log: bool,
+) -> None:
     """Compare two PDF files for structural, textual, and visual differences."""
     logger = setup_logging(verbosity, save_log)
     logger.debug("Debug logging enabled")

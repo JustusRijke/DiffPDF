@@ -15,7 +15,7 @@ LOG_COLORS = {
 }
 
 
-def setup_logging(verbosity, save_log):
+def setup_logging(verbosity: int, save_log: bool) -> logging.Logger:
     if verbosity == 0:
         level = logging.WARNING
     elif verbosity == 1:

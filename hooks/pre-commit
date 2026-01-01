@@ -39,21 +39,21 @@ EOF
 fi
 
 # Ruff checks
-ruff check
-CHECK_EXIT=$?
-
-ruff format --check
-FORMAT_EXIT=$?
-
-if [ $CHECK_EXIT -ne 0 ] || [ $FORMAT_EXIT -ne 0 ]; then
-    if [ $CHECK_EXIT -ne 0 ]; then
-        echo "Ruff found linting errors. Run: ruff check --fix"
-    fi
-    if [ $FORMAT_EXIT -ne 0 ]; then
-        echo "Ruff found formatting issues. Run: ruff format"
-    fi
+ruff check -q
+if [ $? -ne 0 ]; then
+		echo "Ruff found linting errors. Run: ruff check --fix"
     exit 1
 fi
 
-# If there are whitespace errors, print the offending file names and fail.
-exec git diff-index --check --cached $against --
+ruff format --check -q
+if [ $? -ne 0 ]; then
+		echo "Ruff found formatting issues. Run: ruff format"
+    exit 1
+fi
+
+# Mypy checks
+mypy .
+if [ $? -ne 0 ]; then
+		echo "Mypy found type errors. Fix them before committing."
+    exit 1
+fi

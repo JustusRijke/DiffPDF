@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 import fitz
@@ -31,7 +32,12 @@ def compare_images(
 
 
 def check_visual_content(
-    ref: Path, actual: Path, threshold: float, dpi: int, output_dir: Path | None, logger
+    ref: Path,
+    actual: Path,
+    threshold: float,
+    dpi: int,
+    output_dir: Path | None,
+    logger: logging.Logger,
 ) -> bool:
     if output_dir is not None:
         output_dir.mkdir(parents=True, exist_ok=True)

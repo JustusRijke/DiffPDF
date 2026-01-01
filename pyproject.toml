@@ -19,6 +19,7 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX :: Linux",
+    "Typing :: Typed",
 ]
 dependencies = [
     "click",
@@ -37,6 +38,7 @@ dev = [
     "pytest",
     "pytest-cov",
     "ruff",
+    "mypy"
 ]
 
 [project.scripts]

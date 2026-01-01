@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 import fitz
@@ -10,7 +11,7 @@ def get_page_count(pdf_path: Path) -> int:
     return count
 
 
-def check_page_counts(ref: Path, actual: Path, logger) -> bool:
+def check_page_counts(ref: Path, actual: Path, logger: logging.Logger) -> bool:
     ref_count = get_page_count(ref)
     actual_count = get_page_count(actual)
 
