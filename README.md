@@ -35,8 +35,7 @@ Options:
   --threshold FLOAT       Pixelmatch threshold (0.0-1.0)
   --dpi INTEGER           Render resolution
   --output-dir DIRECTORY  Diff image output directory (optional, if not specified no diff images are saved)
-  -v, --verbose           Increase verbosity (-v for INFO, -vv for DEBUG)
-  --save-log              Write log output to log.txt
+  -v, --verbose           Increase verbosity
   --version               Show the version and exit.
   --help                  Show this message and exit.
 ```
@@ -56,7 +55,7 @@ from diffpdf import diffpdf
 diffpdf("reference.pdf", "actual.pdf")
 
 # With options (save diff images to ./output directory)
-diffpdf("reference.pdf", "actual.pdf", output_dir="./output", threshold=0.2, dpi=150, verbosity=2)
+diffpdf("reference.pdf", "actual.pdf", output_dir="./output", threshold=0.2, dpi=150, verbose=True)
 ```
 
 ## Development

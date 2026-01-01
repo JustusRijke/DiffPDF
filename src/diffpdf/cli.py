@@ -25,11 +25,9 @@ from .logger import setup_logging
 @click.option(
     "-v",
     "--verbose",
-    "verbosity",
-    count=True,
-    help="Increase verbosity (-v for INFO, -vv for DEBUG)",
+    is_flag=True,
+    help="Increase verbosity",
 )
-@click.option("--save-log", is_flag=True, help="Write log output to log.txt")
 @click.version_option(package_name="diffpdf")
 def cli(
     reference: Path,
@@ -37,16 +35,15 @@ def cli(
     threshold: float,
     dpi: int,
     output_dir: Path | None,
-    verbosity: int,
-    save_log: bool,
+    verbose: bool,
 ) -> None:
     """Compare two PDF files for structural, textual, and visual differences."""
     try:
-        if diffpdf(reference, actual, threshold, dpi, output_dir, verbosity, save_log):
+        if diffpdf(reference, actual, threshold, dpi, output_dir, verbose):
             sys.exit(0)
         else:
             sys.exit(1)
     except Exception as e:  # pragma: no cover
-        logger = setup_logging(verbosity, save_log)
+        logger = setup_logging(verbose)
         logger.critical(f"Error: {e}", exc_info=True)
         sys.exit(2)

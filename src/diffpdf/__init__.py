@@ -16,15 +16,13 @@ def diffpdf(
     threshold: float = 0.1,
     dpi: int = 96,
     output_dir: str | Path | None = None,
-    verbosity: int = 0,
-    save_log: bool = False,
+    verbose: bool = False,
 ) -> bool:
     ref_path = Path(reference) if isinstance(reference, str) else reference
     actual_path = Path(actual) if isinstance(actual, str) else actual
     out_path = Path(output_dir) if isinstance(output_dir, str) else output_dir
 
-    logger = setup_logging(verbosity, save_log)
-    logger.debug("Debug logging enabled")
+    logger = setup_logging(verbose)
 
     logger.info("[1/4] Checking file hashes...")
     if check_hash(ref_path, actual_path):
@@ -33,17 +31,15 @@ def diffpdf(
     logger.info("Hashes differ, continuing checks")
 
     logger.info("[2/4] Checking page counts...")
-    if not check_page_counts(ref_path, actual_path, logger):
+    if not check_page_counts(ref_path, actual_path):
         return False
 
     logger.info("[3/4] Checking text content...")
-    if not check_text_content(ref_path, actual_path, logger):
+    if not check_text_content(ref_path, actual_path):
         return False
 
     logger.info("[4/4] Checking visual content...")
-    if not check_visual_content(
-        ref_path, actual_path, threshold, dpi, out_path, logger
-    ):
+    if not check_visual_content(ref_path, actual_path, threshold, dpi, out_path):
         return False
 
     logger.info("PDFs are equivalent")
