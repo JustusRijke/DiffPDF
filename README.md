@@ -4,6 +4,7 @@
 [![codecov](https://codecov.io/gh/JustusRijke/DiffPDF/graph/badge.svg?token=O3ZJFG6X7A)](https://codecov.io/gh/JustusRijke/DiffPDF)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PyPI - Downloads](https://img.shields.io/pypi/dw/DiffPDF)](https://pypi.org/project/DiffPDF/)
 
 CLI tool for detecting structural, textual, and visual differences between PDF files, for use in automatic regression tests.
 
