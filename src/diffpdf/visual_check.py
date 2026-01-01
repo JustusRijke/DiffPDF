@@ -22,7 +22,7 @@ def compare_images(
     output_path: Path | None,
 ) -> bool:
     mismatch_count = pixelmatch(
-        ref_img, actual_img, diff_path=output_path, threshold=threshold
+        ref_img, actual_img, output=output_path, threshold=threshold
     )
 
     if mismatch_count > 0:
