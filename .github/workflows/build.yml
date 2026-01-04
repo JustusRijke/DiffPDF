@@ -46,7 +46,9 @@ jobs:
 
       - name: Install oldest dependencies
         if: matrix.dependencies == 'oldest'
-        run: uv sync --resolution lowest --python ${{ steps.python-version.outputs.min }}
+        run: |
+          uv sync --resolution lowest --python ${{ steps.python-version.outputs.min }}
+          uv lock --check
 
       - name: Run ruff (check)
         if: matrix.dependencies == 'locked'
