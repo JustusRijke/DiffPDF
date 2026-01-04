@@ -5,7 +5,6 @@
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
 		"ms-python.python",
-		"matangover.mypy",
 		"charliermarsh.ruff",
 		"ryanluker.vscode-coverage-gutters",
 		"astral-sh.ty"

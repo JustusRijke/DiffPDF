@@ -11,7 +11,7 @@ dynamic = ["version"]
 description = "A tool for comparing PDF files"
 readme = "README.md"
 license = "MIT"
-license-files = ["LICEN[CS]E*"]
+license-files = ["LICENSE"]
 authors = [{name = "Justus Rijke", email="justusrijke@gmail.com"}]
 requires-python = ">=3.10"
 classifiers = [
@@ -32,12 +32,12 @@ dependencies = [
 Homepage = "https://github.com/JustusRijke/DiffPDF"
 Issues = "https://github.com/JustusRijke/DiffPDF/issues"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
-    "pytest",
-    "pytest-cov",
-    "ruff",
-    "mypy"
+    "pytest>=9",
+    "pytest-cov>=6",
+    "ruff>=0.10",
+    "ty>=0.0.8",
 ]
 
 [project.scripts]
@@ -49,8 +49,27 @@ source = "vcs"
 [tool.hatch.version.raw-options]
 local_scheme = "no-local-version"
 
-[tool.ruff]
-target-version = "py310"
+[tool.pytest]
+strict = true
+testpaths = ["tests"]
+filterwarnings = ["error"] # Treat all warnings as errors (e.g., deprecation warnings)
+addopts = [
+    "-v",                           # Verbose output
+    "--cov",                        # Enable coverage 
+    "--cov-branch",                 # Make sure to cover every decision branch
+    "--cov-report=term-missing",    # Report which lines aren't covered
+    "--cov-report=xml",             # Dump to XML for Codecov
+]
 
 [tool.ruff.lint]
-extend-select = ["I"] # Sort imports
+extend-select = [
+    "I",    # Sort imports
+    "ANN",  # Enforce type annotations
+    "PT",   # Common style issues or inconsistencies with pytest-based tests
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true # Combines "as" imports on the same line
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ANN"] # Do not enforce type annotations for tests
