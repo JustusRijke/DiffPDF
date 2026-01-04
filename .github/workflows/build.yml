@@ -32,7 +32,7 @@ jobs:
         id: python-version
         shell: bash
         run: |
-          MIN_PY=$(grep 'requires-python' pyproject.toml | sed -E 's/.*>=([0-9]+\.[0-9]+).*/\1/')
+          MIN_PY=$(grep 'requires-python' pyproject.toml | sed -E 's/[^0-9.]//g')
           echo "min=$MIN_PY" >> $GITHUB_OUTPUT
 
       - name: Install uv
@@ -46,9 +46,7 @@ jobs:
 
       - name: Install oldest dependencies
         if: matrix.dependencies == 'oldest'
-        run: |
-          uv sync --resolution lowest --python ${{ steps.python-version.outputs.min }}
-          uv lock --check
+        run: uv sync --resolution lowest --python ${{ steps.python-version.outputs.min }}
 
       - name: Run ruff (check)
         if: matrix.dependencies == 'locked'
