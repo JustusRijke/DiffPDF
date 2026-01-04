@@ -1,4 +1,3 @@
-# type: ignore
 from pathlib import Path
 
 import pytest
@@ -9,7 +8,7 @@ TEST_ASSETS_DIR = Path(__file__).parent / "assets"
 
 
 @pytest.mark.parametrize(
-    "ref_pdf_rel,actual_pdf_rel,should_pass",
+    ("ref_pdf_rel", "actual_pdf_rel", "should_pass"),
     [
         # Pass cases
         ("pass/identical-A.pdf", "pass/identical-B.pdf", True),

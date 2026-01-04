@@ -38,22 +38,36 @@ EOF
 	exit 1
 fi
 
+# Check if uv is installed
+uv help -q
+if [ $? -ne 0 ]; then
+	echo "'uv' is not installed or not in your PATH"
+    exit 1
+fi
+
+# Check if the project is synced
+uv lock --check -q
+if [ $? -ne 0 ]; then
+    echo "Error: Environment is out of sync. Please run 'uv sync'."
+    exit 1
+fi
+
 # Ruff checks
-ruff check -q
+uv run ruff check -q
 if [ $? -ne 0 ]; then
-		echo "Ruff found linting errors. Run: ruff check --fix"
+	echo "Ruff found linting errors. Please run 'ruff check --fix'"
+	exit 1
+fi
+
+uv run ruff format --check -q
+if [ $? -ne 0 ]; then
+	echo "Ruff found formatting issues. Please run 'ruff format'"
     exit 1
 fi
 
-ruff format --check -q
+# Type annotation checks
+uv run ty check -q
 if [ $? -ne 0 ]; then
-		echo "Ruff found formatting issues. Run: ruff format"
-    exit 1
-fi
-
-# Mypy checks
-mypy .
-if [ $? -ne 0 ]; then
-		echo "Mypy found type errors. Fix them before committing."
+	echo "Found type annotation errors. Please run 'ty check'"
     exit 1
 fi

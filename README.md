@@ -4,6 +4,7 @@
 [![codecov](https://codecov.io/gh/JustusRijke/DiffPDF/graph/badge.svg?token=O3ZJFG6X7A)](https://codecov.io/gh/JustusRijke/DiffPDF)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PyPI - Version](https://img.shields.io/pypi/v/DiffPDF)](https://pypi.org/project/DiffPDF/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dw/DiffPDF)](https://pypi.org/project/DiffPDF/)
 
 CLI tool for detecting structural, textual, and visual differences between PDF files, for use in automatic regression tests.
@@ -20,6 +21,8 @@ DiffPDF uses a fail-fast sequential pipeline to compare PDFs:
 Each stage only runs if all previous stages pass.
 
 ## Installation
+
+Install Python (v3.10 or higher) and install the package:
 
 ```bash
 pip install diffpdf
@@ -54,16 +57,37 @@ from diffpdf import diffpdf
 # Basic usage (no diff images saved)
 diffpdf("reference.pdf", "actual.pdf")
 
-# With options (save diff images to ./output directory)
-diffpdf("reference.pdf", "actual.pdf", output_dir="./output", threshold=0.2, dpi=150, verbose=True)
+# With options (save diff images to ./output directory, extract higher quality images)
+diffpdf("reference.pdf", "actual.pdf", output_dir="./output", dpi=300)
 ```
 
 ## Development
 
+Install [uv](https://github.com/astral-sh/uv?tab=readme-ov-file#installation). Then, install dependencies & activate the automatically generated virtual environment:
+
 ```bash
-pip install -e .[dev]
-pytest tests/ -v
-ruff check .
+uv sync --locked
+source .venv/bin/activate
+```
+
+Skip `--locked` to use the newest dependencies (this might modify `uv.lock`)
+
+Run tests:
+```bash
+pytest
+```
+
+Check code quality:
+```bash
+ruff check
+ruff format --check
+ty check
+```
+
+Better yet, install the [pre-commit](.git/hooks/pre-commit) hook, which runs code quality checks before every commit:
+```bash
+cp hooks/pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
 ```
 
 ## Acknowledgements
