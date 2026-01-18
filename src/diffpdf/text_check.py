@@ -33,7 +33,7 @@ def generate_diff(
     return diff
 
 
-def check_text_content(ref: Path, actual: Path) -> bool:
+def check_text_content(ref: Path, actual: Path, output_dir: Path | None) -> bool:
     logger = logging.getLogger()
     # Extract text and remove whitespace
     ref_text = re.sub(r"\s+", " ", extract_text(ref)).strip()
@@ -42,6 +42,12 @@ def check_text_content(ref: Path, actual: Path) -> bool:
     if ref_text != actual_text:
         diff = generate_diff(ref_text, ref, actual_text, actual)
         diff_text = "\n".join(diff)
+
+        if output_dir is not None:
+            output_dir.mkdir(parents=True, exist_ok=True)
+            diff_file = output_dir / f"{ref.stem}_vs_{actual.stem}_text_diff.txt"
+            diff_file.write_text(diff_text)
+
         logger.error(f"Text content mismatch:\n {diff_text}")
         return False
 

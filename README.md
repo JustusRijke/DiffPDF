@@ -37,7 +37,7 @@ Usage: diffpdf [OPTIONS] REFERENCE ACTUAL
 Options:
   --threshold FLOAT       Pixelmatch threshold (0.0-1.0)
   --dpi INTEGER           Render resolution
-  --output-dir DIRECTORY  Diff image output directory (optional, if not specified no diff images are saved)
+  --output-dir DIRECTORY  Diff output directory (saves text diffs and visual diff images on failure)
   -v, --verbose           Increase verbosity
   --version               Show the version and exit.
   --help                  Show this message and exit.
@@ -54,10 +54,10 @@ Options:
 ```python
 from diffpdf import diffpdf
 
-# Basic usage (no diff images saved)
+# Basic usage (no diff output saved)
 diffpdf("reference.pdf", "actual.pdf")
 
-# With options (save diff images to ./output directory, extract higher quality images)
+# With options (save text diffs and visual diff images to ./output directory)
 diffpdf("reference.pdf", "actual.pdf", output_dir="./output", dpi=300)
 ```
 

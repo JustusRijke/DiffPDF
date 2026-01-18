@@ -35,7 +35,7 @@ def diffpdf(
         return False
 
     logger.info("[3/4] Checking text content...")
-    if not check_text_content(ref_path, actual_path):
+    if not check_text_content(ref_path, actual_path, out_path):
         return False
 
     logger.info("[4/4] Checking visual content...")

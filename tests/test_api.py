@@ -28,3 +28,15 @@ def test_api(ref_pdf_rel, actual_pdf_rel, should_pass):
     result = diffpdf(ref_pdf, actual_pdf)
 
     assert result == should_pass
+
+
+def test_text_diff_output(tmp_path):
+    ref_pdf = TEST_ASSETS_DIR / "fail/1-letter-diff-A.pdf"
+    actual_pdf = TEST_ASSETS_DIR / "fail/1-letter-diff-B.pdf"
+
+    result = diffpdf(ref_pdf, actual_pdf, output_dir=tmp_path)
+
+    assert result is False
+    diff_file = tmp_path / "1-letter-diff-A_vs_1-letter-diff-B_text_diff.txt"
+    assert diff_file.exists()
+    assert diff_file.read_text()
