@@ -1,0 +1,36 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-illegal-windows-names
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: end-of-file-fixer
+
+  - repo: local
+    hooks:
+      - id: uv-sync-check
+        name: check uv is synced
+        entry: uv lock --check -q
+        language: system
+        pass_filenames: false
+
+      - id: ruff-lint
+        name: lint
+        entry: uv run ruff check --fix -q
+        language: system
+        pass_filenames: false
+
+      - id: ruff-format
+        name: format
+        entry: uv run ruff format -q
+        language: system
+        pass_filenames: false
+
+      - id: ty
+        name: type check
+        entry: uv run ty check -q
+        language: system
+        pass_filenames: false

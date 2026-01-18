@@ -29,7 +29,8 @@ pip install diffpdf
 ```
 
 ## CLI Usage
-```
+
+```bash
 Usage: diffpdf [OPTIONS] REFERENCE ACTUAL
 
   Compare two PDF files for structural, textual, and visual differences.
@@ -43,7 +44,7 @@ Options:
   --help                  Show this message and exit.
 ```
 
-**Exit Codes**
+### Exit Codes
 
 - `0` — Pass (PDFs are equivalent)
 - `1` — Fail (differences detected)
@@ -72,22 +73,26 @@ source .venv/bin/activate
 
 Skip `--locked` to use the newest dependencies (this might modify `uv.lock`)
 
+### Testing
+
 Run tests:
+
 ```bash
 pytest
 ```
 
-Check code quality:
+### Quality Assurance (QA)
+
+Automatically run code quality checks before every commit using [pre-commit](https://pre-commit.com/):
+
 ```bash
-ruff check
-ruff format --check
-ty check
+pre-commit install
 ```
 
-Better yet, install the [pre-commit](.git/hooks/pre-commit) hook, which runs code quality checks before every commit:
+This installs git hooks that run ruff, type checks, and other checks before each commit. You can run manually at any time with:
+
 ```bash
-cp hooks/pre-commit .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
+pre-commit run --all-files
 ```
 
 ## Acknowledgements

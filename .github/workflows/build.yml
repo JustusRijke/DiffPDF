@@ -48,21 +48,13 @@ jobs:
         if: matrix.dependencies == 'oldest'
         run: uv sync --resolution lowest --python ${{ steps.python-version.outputs.min }}
 
-      - name: Run ruff (check)
+      - name: Run pre-commit hooks
         if: matrix.dependencies == 'locked'
-        run: uv run ruff check
-
-      - name: Run ruff (format)
-        if: matrix.dependencies == 'locked'
-        run: uv run ruff format --check
-
-      - name: Run ty
-        if: matrix.dependencies == 'locked'
-        run: uv run ty check --output-format github
+        run: uv run pre-commit run --all-files
 
       - name: Run pytest
         run: uv run pytest
-
+        
       - name: Upload coverage reports to Codecov
         if: matrix.os == 'ubuntu-latest' && matrix.dependencies == 'locked'
         uses: codecov/codecov-action@v5
