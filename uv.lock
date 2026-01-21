@@ -552,7 +552,7 @@ wheels = [
 
 [[package]]
 name = "pixelmatch-fast"
-version = "1.3.1"
+version = "1.3.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -560,10 +560,11 @@ dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pillow" },
+    { name = "pre-commit" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d0/40/ed9fe06f5a3856913f3ebfc0cce9833ab518b3ad29bfbe00840502659101/pixelmatch_fast-1.3.1.tar.gz", hash = "sha256:d204d3cce4a9a8fd131c0983ffd5ae2e49571f5bf62b34fff337b9f57e9445bc", size = 1425854, upload-time = "2026-01-04T19:54:19.849Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/48/a6/b9bdb57f18defc2bf9b4e5d945f03ad98378f2ca410de0353d600960c245/pixelmatch_fast-1.3.2.tar.gz", hash = "sha256:e5e9b722d755596eedc6bf8e0ded2b867d4984b366621282daecaf858e5888fd", size = 1433731, upload-time = "2026-01-17T10:22:30.594Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/55/55/93ec89aad51bbc71248599c949ca1dcf7bae308b0f52a8490418e4326be7/pixelmatch_fast-1.3.1-py3-none-any.whl", hash = "sha256:1bccb443868e02cec7884152ab68b1e371746597e8c7912543de0f9dd789c9c4", size = 9251, upload-time = "2026-01-04T19:54:18.209Z" },
+    { url = "https://files.pythonhosted.org/packages/3e/47/e90de1e1684ec37ca2c3cd97698751d3ea8bab5ebec174c5bfd2ce977e12/pixelmatch_fast-1.3.2-py3-none-any.whl", hash = "sha256:195876155e7ccb4e174688e14df34653aa20b5ce4d35c53135ddcf4bd361dfc5", size = 9814, upload-time = "2026-01-17T10:22:29.151Z" },
 ]
 
 [[package]]
