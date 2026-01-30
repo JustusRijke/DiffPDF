@@ -19,7 +19,7 @@ TEST_ASSETS_DIR = Path(__file__).parent / "assets"
         ("fail/1-letter-diff-A.pdf", "fail/1-letter-diff-B.pdf", False),
         ("fail/major-color-diff-A.pdf", "fail/major-color-diff-B.pdf", False),
         ("fail/page-count-diff-A.pdf", "fail/page-count-diff-B.pdf", False),
-        ("fail/test_unicode_1.pdf", "fail/test_unicode_2.pdf", False),
+        ("fail/unicode-A.pdf", "fail/unicode-B.pdf", False),
     ],
 )
 def test_api(ref_pdf_rel, actual_pdf_rel, should_pass):
