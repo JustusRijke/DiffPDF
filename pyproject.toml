@@ -63,11 +63,14 @@ addopts = [
 ]
 
 [tool.ruff.lint]
+preview = true
 extend-select = [
     "I",    # Sort imports
     "ANN",  # Enforce type annotations
     "PT",   # Common style issues or inconsistencies with pytest-based tests
-]
+    "PTH",  # Use PathLib
+    "PLW1514", # Must specify file encoding
+    ]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true # Combines "as" imports on the same line
