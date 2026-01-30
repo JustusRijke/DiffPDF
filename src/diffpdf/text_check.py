@@ -46,7 +46,7 @@ def check_text_content(ref: Path, actual: Path, output_dir: Path | None) -> bool
         if output_dir is not None:
             output_dir.mkdir(parents=True, exist_ok=True)
             diff_file = output_dir / f"{ref.stem}_vs_{actual.stem}_text_diff.txt"
-            diff_file.write_text(diff_text)
+            diff_file.write_text(diff_text, encoding="utf-8")
 
         logger.error(f"Text content mismatch:\n {diff_text}")
         return False
