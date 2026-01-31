@@ -62,6 +62,14 @@ diffpdf("reference.pdf", "actual.pdf")
 diffpdf("reference.pdf", "actual.pdf", output_dir="./output", dpi=300)
 ```
 
+## Cross-Platform Considerations
+
+PDF rendering may differ slightly between platforms due to different font
+rendering engines (ClearType on Windows, FreeType on Linux). DiffPDF's
+default threshold accounts for these minor differences.
+
+**Tip:** Generate reference PDFs on the same platform as your CI environment
+
 ## Development
 
 Install [uv](https://github.com/astral-sh/uv?tab=readme-ov-file#installation). Then, install dependencies & activate the automatically generated virtual environment:
