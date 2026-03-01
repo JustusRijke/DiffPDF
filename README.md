@@ -40,6 +40,7 @@ Options:
   --dpi INTEGER           Render resolution
   --output-dir DIRECTORY  Diff output directory (saves text diffs and visual diff images on failure)
   -v, --verbose           Increase verbosity
+  --skip-compare-text     Skip text content comparison
   --version               Show the version and exit.
   --help                  Show this message and exit.
 ```

@@ -28,6 +28,11 @@ from .logger import setup_logging
     is_flag=True,
     help="Increase verbosity",
 )
+@click.option(
+    "--skip-compare-text",
+    is_flag=True,
+    help="Skip text content comparison (useful when different render engines produce identical-looking PDFs with different text extraction order)",
+)
 @click.version_option(package_name="diffpdf")
 def cli(
     reference: Path,
@@ -36,10 +41,13 @@ def cli(
     dpi: int,
     output_dir: Path | None,
     verbose: bool,
+    skip_compare_text: bool,
 ) -> None:
     """Compare two PDF files for structural, textual, and visual differences."""
     try:
-        if diffpdf(reference, actual, threshold, dpi, output_dir, verbose):
+        if diffpdf(
+            reference, actual, threshold, dpi, output_dir, verbose, skip_compare_text
+        ):
             sys.exit(0)
         else:
             sys.exit(1)
