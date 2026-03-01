@@ -1,0 +1,32 @@
+# Dependabot Auto-Merge
+#
+# Auto-merges all Dependabot PRs after required status checks pass.
+#
+# CAUTION: Only use with high test coverage and comprehensive CI checks.
+#
+# Requirements:
+# 1. Enable auto-merge: Settings > General > Pull Requests > Allow auto-merge
+# 2. Configure required checks: Settings > Rules > Rulesets > New branch ruleset
+#      Enable "Require status checks to pass", add check names (e.g. test, codecov/patch)
+
+
+name: Dependabot auto-merge
+
+on:
+  pull_request_target:
+
+permissions: {}
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-24.04
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Auto-merge Dependabot PRs
+        run: gh pr merge --merge --auto "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

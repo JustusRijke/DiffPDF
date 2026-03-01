@@ -31,6 +31,24 @@ def test_api(ref_pdf_rel, actual_pdf_rel, should_pass):
     assert result == should_pass
 
 
+def test_skip_compare_text():
+    ref_pdf = TEST_ASSETS_DIR / "fail/1-letter-diff-A.pdf"
+    actual_pdf = TEST_ASSETS_DIR / "fail/1-letter-diff-B.pdf"
+
+    # Without skip: fails at text stage
+    assert diffpdf(ref_pdf, actual_pdf) is False
+    # With skip: text stage bypassed, fails at visual stage (letter difference is visible)
+    assert diffpdf(ref_pdf, actual_pdf, skip_compare_text=True) is False
+
+
+def test_skip_compare_text_multiplatform():
+    ref_pdf = TEST_ASSETS_DIR / "pass/multiplatform-diff-A.pdf"
+    actual_pdf = TEST_ASSETS_DIR / "pass/multiplatform-diff-B.pdf"
+
+    # Multiplatform PDFs already pass with text comparison
+    assert diffpdf(ref_pdf, actual_pdf, skip_compare_text=True) is True
+
+
 def test_text_diff_output(tmp_path):
     ref_pdf = TEST_ASSETS_DIR / "fail/1-letter-diff-A.pdf"
     actual_pdf = TEST_ASSETS_DIR / "fail/1-letter-diff-B.pdf"

@@ -20,6 +20,19 @@ def test_cli_with_output_dir():
         assert Path("./diff").exists()
 
 
+def test_skip_compare_text_flag():
+    runner = CliRunner()
+    result = runner.invoke(
+        cli,
+        [
+            str(TEST_ASSETS_DIR / "pass/multiplatform-diff-A.pdf"),
+            str(TEST_ASSETS_DIR / "pass/multiplatform-diff-B.pdf"),
+            "--skip-compare-text",
+        ],
+    )
+    assert result.exit_code == 0
+
+
 def test_verbose_flag():
     runner = CliRunner()
     result = runner.invoke(
