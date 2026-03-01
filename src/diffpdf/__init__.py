@@ -17,6 +17,7 @@ def diffpdf(
     dpi: int = 96,
     output_dir: str | Path | None = None,
     verbose: bool = False,
+    skip_compare_text: bool = False,
 ) -> bool:
     ref_path = Path(reference) if isinstance(reference, str) else reference
     actual_path = Path(actual) if isinstance(actual, str) else actual
@@ -34,9 +35,12 @@ def diffpdf(
     if not check_page_counts(ref_path, actual_path):
         return False
 
-    logger.info("[3/4] Checking text content...")
-    if not check_text_content(ref_path, actual_path, out_path):
-        return False
+    if skip_compare_text:
+        logger.info("[3/4] Skipping text content check")
+    else:
+        logger.info("[3/4] Checking text content...")
+        if not check_text_content(ref_path, actual_path, out_path):
+            return False
 
     logger.info("[4/4] Checking visual content...")
     if not check_visual_content(ref_path, actual_path, threshold, dpi, out_path):
