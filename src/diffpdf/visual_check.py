@@ -25,10 +25,7 @@ def compare_images(
         ref_img, actual_img, output=output_path, threshold=threshold
     )
 
-    if mismatch_count > 0:
-        return False
-
-    return True
+    return not mismatch_count > 0
 
 
 def check_visual_content(

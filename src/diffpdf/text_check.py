@@ -1,8 +1,8 @@
 import difflib
 import logging
 import re
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 import fitz
 
@@ -22,15 +22,13 @@ def generate_diff(
     ref_lines = ref_text.splitlines(keepends=True)
     actual_lines = actual_text.splitlines(keepends=True)
 
-    diff = difflib.unified_diff(
+    return difflib.unified_diff(
         ref_lines,
         actual_lines,
         fromfile=ref.name,
         tofile=actual.name,
         lineterm="",
     )
-
-    return diff
 
 
 def check_text_content(ref: Path, actual: Path, output_dir: Path | None) -> bool:

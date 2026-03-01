@@ -50,4 +50,4 @@ def diffpdf(
     return True
 
 
-__all__ = ["diffpdf", "__version__"]
+__all__ = ["__version__", "diffpdf"]
