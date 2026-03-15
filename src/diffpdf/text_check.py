@@ -46,7 +46,8 @@ def check_text_content(ref: Path, actual: Path, output_dir: Path | None) -> bool
             diff_file = output_dir / f"{ref.stem}_vs_{actual.stem}_text_diff.txt"
             diff_file.write_text(diff_text, encoding="utf-8")
 
-        logger.error(f"Text content mismatch:\n {diff_text}")
+        preview = diff_text[:80] + ("..." if len(diff_text) > 80 else "")
+        logger.error(f"Text content mismatch:\n{preview}")
         return False
 
     logger.info("Text content identical")
