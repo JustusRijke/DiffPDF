@@ -177,8 +177,8 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "click", specifier = ">=8" },
-    { name = "pillow", specifier = ">=10.0.0" },
-    { name = "pixelmatch-fast", specifier = ">=1.3.1" },
+    { name = "pillow", specifier = ">=12.1.1" },
+    { name = "pixelmatch-fast", specifier = ">=1.3.3" },
     { name = "pymupdf", specifier = ">=1.23.0" },
 ]
 
@@ -568,7 +568,7 @@ wheels = [
 
 [[package]]
 name = "pixelmatch-fast"
-version = "1.3.2"
+version = "1.3.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -576,11 +576,10 @@ dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pillow" },
-    { name = "pre-commit" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/48/a6/b9bdb57f18defc2bf9b4e5d945f03ad98378f2ca410de0353d600960c245/pixelmatch_fast-1.3.2.tar.gz", hash = "sha256:e5e9b722d755596eedc6bf8e0ded2b867d4984b366621282daecaf858e5888fd", size = 1433731, upload-time = "2026-01-17T10:22:30.594Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7a/73/0210f25637dffe7b1dc9e1716d79a13c68620a98dc8d13c797589192fa2b/pixelmatch_fast-1.3.3.tar.gz", hash = "sha256:b2a04230843d48173de58c3fa276982f7e6d013cf3d9674eac7ba514c2d9ffb8", size = 1434051, upload-time = "2026-03-15T11:24:04.226Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3e/47/e90de1e1684ec37ca2c3cd97698751d3ea8bab5ebec174c5bfd2ce977e12/pixelmatch_fast-1.3.2-py3-none-any.whl", hash = "sha256:195876155e7ccb4e174688e14df34653aa20b5ce4d35c53135ddcf4bd361dfc5", size = 9814, upload-time = "2026-01-17T10:22:29.151Z" },
+    { url = "https://files.pythonhosted.org/packages/83/46/c737a5cc21a402b982405e2885f3b81f5aec5709d36742af27d21146e976/pixelmatch_fast-1.3.3-py3-none-any.whl", hash = "sha256:1be00aab77d9ffa1abfcd796c93db2489556103ecca6198f60bc8c2ea9d7bdfb", size = 9798, upload-time = "2026-03-15T11:24:02.561Z" },
 ]
 
 [[package]]
