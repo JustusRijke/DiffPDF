@@ -1,49 +1,50 @@
-[build-system]
-requires = [
-    "hatchling",
-    "hatch-vcs",
-]
-build-backend = "hatchling.build"
-
 [project]
 name = "diffpdf"
-dynamic = ["version"]
 description = "A tool for comparing PDF files"
 readme = "README.md"
+requires-python = ">=3.11.1"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{name = "Justus Rijke", email="justusrijke@gmail.com"}]
-requires-python = ">=3.11.1"
+authors = [{ name = "Justus Rijke", email = "justusrijke@gmail.com" }]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "Development Status :: 5 - Production/Stable",
-    "Operating System :: Microsoft :: Windows",
-    "Operating System :: POSIX :: Linux",
-    "Typing :: Typed",
+  "Development Status :: 5 - Production/Stable",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Typing :: Typed",
 ]
 dependencies = [
-    "click>=8",
-    "pymupdf>=1.23.0",
-    "pixelmatch-fast>=1.3.4",
-    "Pillow>=12.1.1",
+  "Pillow>=12.1.1",
+  "click>=8",
+  "pixelmatch-fast>=1.3.4",
+  "pymupdf>=1.23.0",
 ]
+dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://github.com/JustusRijke/DiffPDF"
 Issues = "https://github.com/JustusRijke/DiffPDF/issues"
 
-[dependency-groups]
-dev = [
-    "pytest>=9",
-    "pytest-cov>=6",
-    "ruff>=0.15.4",
-    "ty>=0.0.8",
-    "pre-commit>=4.5.1",
-    "nodeenv>=1.4.0", # Required for pre-commit
-]
-
 [project.scripts]
 diffpdf = "diffpdf.cli:cli"
+
+[dependency-groups]
+dev = [
+  "nodeenv>=1.4.0",     # Required for pre-commit
+  "pre-commit>=4.5.1",
+  "pytest>=9",
+  "pytest-cov>=6",
+  "ruff>=0.15.4",
+  "tomli>=2.4.1",
+  "ty>=0.0.8",
+]
+
+[build-system]
+requires = [
+  "hatch-vcs",
+  "hatchling",
+]
+build-backend = "hatchling.build"
 
 [tool.hatch.version]
 source = "vcs"
@@ -52,29 +53,34 @@ source = "vcs"
 local_scheme = "no-local-version"
 
 [tool.pytest]
+addopts = [
+  "--cov",                      # Enable coverage
+  "--cov-branch",               # Make sure to cover every decision branch
+  "--cov-report=term-missing",  # Report which lines aren't covered
+  "--cov-report=xml",           # Dump to XML for Codecov
+  "-v",                         # Verbose output
+]
+filterwarnings = [
+  "error"
+]                               # Treat all warnings as errors (e.g., deprecation warnings)
 strict = true
 testpaths = ["tests"]
-filterwarnings = ["error"] # Treat all warnings as errors (e.g., deprecation warnings)
-addopts = [
-    "-v",                           # Verbose output
-    "--cov",                        # Enable coverage 
-    "--cov-branch",                 # Make sure to cover every decision branch
-    "--cov-report=term-missing",    # Report which lines aren't covered
-    "--cov-report=xml",             # Dump to XML for Codecov
-]
 
 [tool.ruff.lint]
 preview = true
 extend-select = [
-    "I",    # Sort imports
-    "ANN",  # Enforce type annotations
-    "PT",   # Common style issues or inconsistencies with pytest-based tests
-    "PTH",  # Use PathLib
-    "PLW1514", # Must specify file encoding
-    ]
+  "I",             # Sort imports
+  "ANN",           # Enforce type annotations
+  "PT",            # Common style issues or inconsistencies with pytest-based tests
+  "PTH",           # Use PathLib
+  "PLW1514",       # Must specify file encoding
+]
 
 [tool.ruff.lint.isort]
-combine-as-imports = true # Combines "as" imports on the same line
+combine-as-imports = true  # Combines "as" imports on the same line
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["ANN"] # Do not enforce type annotations for tests
+"tests/**" = ["ANN"]  # Do not enforce type annotations for tests
+
+[tool.tombi.format.rules]
+trailing-comment-alignment = true

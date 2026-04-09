@@ -1,12 +1,20 @@
 {
-    // Format with Ruff on save & sort imports
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.codeActionsOnSave": {
-        "source.organizeImports.ruff": "explicit"
-    },
-
     // Configure Pytest
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
+    // Format on save & sort imports
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports.ruff": "explicit"
+    },
+    // Specify formatters
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "tombi-toml.tombi"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    },
 }
