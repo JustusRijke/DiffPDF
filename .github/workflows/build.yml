@@ -15,7 +15,7 @@ jobs:
         dependencies: [locked, oldest]
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       # When searching for a system Python version, uv will use the first compatible version - not the newest version.
       # Therefore, make sure the newest version is available on the runner.
