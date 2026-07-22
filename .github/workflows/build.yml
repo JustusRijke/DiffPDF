@@ -20,7 +20,7 @@ jobs:
       # When searching for a system Python version, uv will use the first compatible version - not the newest version.
       # Therefore, make sure the newest version is available on the runner.
       - name: Install Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: 3.x
           
